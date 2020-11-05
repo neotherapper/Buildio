@@ -3,13 +3,12 @@ import { Building } from '@buildio/building/models';
 
 @Component({
   templateUrl: './selected-building-page.component.html',
-  styleUrls: ['./selected-building-page.component.scss']
+  styleUrls: ['./selected-building-page.component.scss'],
 })
 export class SelectedBuildingPageComponent implements OnInit {
-
   building: Building;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
     this.building = {
@@ -19,11 +18,15 @@ export class SelectedBuildingPageComponent implements OnInit {
         city: 'London',
         street: '30 St Mary Axe',
       },
-      description:
-        `It stands 103 stories tall (1,250 feet to top floor, excludes height of antennae, which is 204 feet).
+      description: `It stands 103 stories tall (1,250 feet to top floor, excludes height of antennae, which is 204 feet).
         It is located on Fifth Avenue between 33rd and 34th streets in Manhattan.
         The Empire State Building took only one year and 45 days to build, or more than seven million man-hours`,
     };
   }
 
+  addNickName(nickname: string): void {
+
+  }
+
+  removeNickName(): void {}
 }
