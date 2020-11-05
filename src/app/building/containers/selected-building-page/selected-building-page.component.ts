@@ -14,7 +14,7 @@ export class SelectedBuildingPageComponent implements OnInit {
   ngOnInit(): void {
     this.building = {
       id: 17,
-      nicknames: [],
+      nicknames: ['empire', 'shard'],
       address: {
         city: 'London',
         street: '30 St Mary Axe',
