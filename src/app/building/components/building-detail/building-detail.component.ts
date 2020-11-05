@@ -1,4 +1,10 @@
-import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  Input,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { Address, Building, Room } from '@buildio/building/models';
 
 @Component({
@@ -18,6 +24,9 @@ export class BuildingDetailComponent {
    */
 
   @Input() building!: Building;
+
+  @Output() add = new EventEmitter<string>();
+  @Output() remove = new EventEmitter<string>();
 
   /**
    * Tip: Utilize getters to keep templates clean
