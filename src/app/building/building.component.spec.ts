@@ -22,4 +22,6 @@ describe('BuildingComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+
 });
