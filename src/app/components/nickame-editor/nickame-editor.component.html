@@ -1,1 +1,21 @@
-<p>nickame-editor works!</p>
+<mat-form-field class="nickname-editor">
+  <mat-chip-list #chipList aria-label="Nickname selection">
+    <mat-chip *ngFor="let nickname of nicknames"
+      [selectable]="selectable"
+      [removable]="removable"
+      (removed)="remove.emit(nickname)">
+      {{nickname}}
+      <mat-icon matChipRemove
+        *ngIf="removable">
+        cancel
+      </mat-icon>
+    </mat-chip>
+    <input placeholder="New Nickname..."
+      class="nickname-editor__input"
+      [matChipInputFor]="chipList"
+      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+      [matChipInputAddOnBlur]="addOnBlur"
+      (matChipInputTokenEnd)="add.emit($event.value)">
+
+  </mat-chip-list>
+</mat-form-field>
