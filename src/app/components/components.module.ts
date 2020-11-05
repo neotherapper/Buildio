@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NickameEditorComponent } from './nickame-editor/nickame-editor.component';
 
-export const COMPONENTS = [
-];
+import { MaterialModule } from '@buildio/material';
 
+export const COMPONENTS = [NickameEditorComponent];
 
 @NgModule({
   declarations: [COMPONENTS],
-  imports: [CommonModule],
+  imports: [CommonModule, MaterialModule],
   exports: COMPONENTS,
 })
 export class ComponentsModule {}
