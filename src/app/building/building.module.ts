@@ -6,9 +6,15 @@ import { BuildingComponent } from './building.component';
 import { BuildingDetailComponent } from './components/building-detail/building-detail.component';
 import { SelectedBuildingPageComponent } from './containers/selected-building-page/selected-building-page.component';
 
+export const COMPONENTS = [BuildingDetailComponent];
+
+export const CONTAINERS = [
+  BuildingComponent,
+  SelectedBuildingPageComponent
+];
 
 @NgModule({
-  declarations: [BuildingComponent, BuildingDetailComponent, SelectedBuildingPageComponent],
+  declarations: [COMPONENTS, CONTAINERS],
   imports: [
     CommonModule,
     BuildingRoutingModule
