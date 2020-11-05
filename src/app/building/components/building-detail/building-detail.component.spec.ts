@@ -48,9 +48,8 @@ describe('BuildingDetailComponent', () => {
   });
 
   it('should display Title in uppercase', () => {
+    const title: HTMLElement = buildingEl.querySelector('h1');
     const expectedTitle = `${expectedBuilding.address.street}, ${expectedBuilding.address.city}`.toUpperCase();
-    expect(buildingEl.textContent).toContain(expectedTitle);
+    expect(title.textContent).toContain(expectedTitle);
   });
-
-
 });

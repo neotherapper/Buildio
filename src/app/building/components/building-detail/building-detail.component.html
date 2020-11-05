@@ -1,3 +1,5 @@
-<section *ngIf="building" class="building-detail">
-  <h1>{{building.address.street.toUpperCase()}}, {{building.address.city.toUpperCase()}}</h1>
+<section class="building-detail">
+  <div *ngIf="building">
+    <h1>{{building.address.street.toUpperCase()}}, {{building.address.city.toUpperCase()}}</h1>
+  </div>
 </section>
