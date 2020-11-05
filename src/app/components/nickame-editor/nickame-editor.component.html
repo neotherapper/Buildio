@@ -1,5 +1,6 @@
 <mat-form-field class="nickname-editor">
-  <mat-chip-list #chipList aria-label="Nickname selection">
+  <mat-chip-list #chipList aria-label="Nickname selection"
+    class="mat-chip-list-stacked">
     <mat-chip *ngFor="let nickname of nicknames"
       [selectable]="selectable"
       [removable]="removable"
