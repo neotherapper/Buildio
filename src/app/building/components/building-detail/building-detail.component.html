@@ -1,0 +1,9 @@
+<section class="building-detail">
+  <div *ngIf="building">
+    <h1>{{building.address.street.toUpperCase()}}, {{building.address.city.toUpperCase()}}</h1>
+
+    <p class="building-detail__description">{{building.description}}</p>
+
+    <div>Nickname Editor</div>
+  </div>
+</section>
