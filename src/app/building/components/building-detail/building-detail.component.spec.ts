@@ -4,7 +4,7 @@ import { By } from '@angular/platform-browser';
 import { Building } from '@buildio/building/models';
 import { BuildingDetailComponent } from './building-detail.component';
 
-describe('BuildingDetailComponent', () => {
+fdescribe('BuildingDetailComponent', () => {
   let component: BuildingDetailComponent;
   let fixture: ComponentFixture<BuildingDetailComponent>;
   let buildingDe;
@@ -51,5 +51,11 @@ describe('BuildingDetailComponent', () => {
     const title: HTMLElement = buildingEl.querySelector('h1');
     const expectedTitle = `${expectedBuilding.address.street}, ${expectedBuilding.address.city}`.toUpperCase();
     expect(title.textContent).toContain(expectedTitle);
+  });
+
+  it('should display the building description', () => {
+    const description: HTMLElement = buildingEl.querySelector('.building-detail__description');
+    const expectedDescription = `${expectedBuilding.description}`;
+    expect(description.textContent).toContain(expectedDescription);
   });
 });
