@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { MaterialModule } from '@buildio/material';
+
 import { BuildingRoutingModule } from './building-routing.module';
 import { BuildingComponent } from './building.component';
 import { BuildingDetailComponent } from './components/building-detail/building-detail.component';
@@ -15,9 +17,6 @@ export const CONTAINERS = [
 
 @NgModule({
   declarations: [COMPONENTS, CONTAINERS],
-  imports: [
-    CommonModule,
-    BuildingRoutingModule
-  ]
+  imports: [CommonModule, BuildingRoutingModule, MaterialModule],
 })
-export class BuildingModule { }
+export class BuildingModule {}
