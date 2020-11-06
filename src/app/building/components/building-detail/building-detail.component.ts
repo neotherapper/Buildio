@@ -24,6 +24,7 @@ export class BuildingDetailComponent {
    */
 
   @Input() building!: Building;
+  @Input() nicknames!: string[];
 
   @Output() add = new EventEmitter<string>();
   @Output() remove = new EventEmitter<string>();
@@ -41,10 +42,6 @@ export class BuildingDetailComponent {
 
   get description(): string {
     return this.building.description;
-  }
-
-  get nicknames(): string[] {
-    return this.building.nicknames;
   }
 
   get rooms(): Room[] {

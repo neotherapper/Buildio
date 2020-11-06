@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Building } from '@buildio/building/models';
+import { BuildingService } from '@buildio/building/services/building.service';
+import { NicknameStorageService } from '@buildio/building/services/nickname-storage.service';
 
 @Component({
   templateUrl: './selected-building-page.component.html',
@@ -7,8 +9,12 @@ import { Building } from '@buildio/building/models';
 })
 export class SelectedBuildingPageComponent implements OnInit {
   building: Building;
+  nicknames: string[];
 
-  constructor() {}
+  constructor(
+    private buildService: BuildingService,
+    private nickNameStorage: NicknameStorageService
+  ) {}
 
   ngOnInit(): void {
     this.building = {
@@ -22,11 +28,32 @@ export class SelectedBuildingPageComponent implements OnInit {
         It is located on Fifth Avenue between 33rd and 34th streets in Manhattan.
         The Empire State Building took only one year and 45 days to build, or more than seven million man-hours`,
     };
+
+    this.nickNameStorage.setNicknames(this.building.nicknames);
+
+    // when there is a new change we update the nicknames
+    this.nickNameStorage.nicknamesState.subscribe( (nicknames) => {
+      this.nicknames = nicknames;
+    });
   }
 
-  addNickName(nickname: string): void {
+  async addNickName(nickname: string): Promise<void> {
+    const isValidNickname = await this.buildService
+      .isValidNickname(nickname)
+      .toPromise();
 
+    if (isValidNickname) {
+      this.nickNameStorage.addNickName(nickname);
+    }
   }
 
-  removeNickName(): void {}
+  async removeNickName(nickname: string): Promise<void> {
+    const isValidNickname = await this.buildService
+      .isValidNickname(nickname)
+      .toPromise();
+
+    if (isValidNickname) {
+      this.nickNameStorage.removeNickname(nickname);
+    }
+  }
 }

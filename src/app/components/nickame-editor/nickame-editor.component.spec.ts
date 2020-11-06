@@ -9,7 +9,7 @@ import { MatChipListHarness } from '@angular/material/chips/testing';
 import { NickameEditorComponent } from './nickame-editor.component';
 import { MatIcon } from '@angular/material/icon';
 
-fdescribe('NickameEditorComponent', () => {
+describe('NickameEditorComponent', () => {
   let component: NickameEditorComponent;
   let fixture: ComponentFixture<NickameEditorComponent>;
   let editorDe;
@@ -34,10 +34,7 @@ fdescribe('NickameEditorComponent', () => {
     editorEl = editorDe.nativeElement;
 
     // mock the building supplied by the parent component
-    expectedNicknames = [
-      'empire',
-      'shard'
-    ];
+    expectedNicknames = ['empire', 'shard'];
 
     // simulate the parent setting the input property with that building
     component.nicknames = expectedNicknames;
@@ -59,7 +56,7 @@ fdescribe('NickameEditorComponent', () => {
     }
   });
 
-  it('should raise add event when clicked with nickname paylod', async () => {
+  it('should raise add event when clicked with nickname paylod', async (done) => {
     spyOn(component.add, 'emit');
     const matChipList = await loader.getHarness(MatChipListHarness);
     const matChipInput = await matChipList.getInput();
@@ -74,6 +71,7 @@ fdescribe('NickameEditorComponent', () => {
     inputEl.triggerEventHandler('keydown', null);
 
     expect(component.add.emit).toHaveBeenCalledWith(expectedNickname);
+    done();
   });
 
   it('should raise remove event when clicked with nickname payload', () => {
@@ -82,7 +80,7 @@ fdescribe('NickameEditorComponent', () => {
 
     const iconEl = fixture.debugElement.queryAll(By.directive(MatIcon))[0];
 
-    iconEl.triggerEventHandler('click', null);
+    iconEl.triggerEventHandler('click', { stopPropagation: () => {}});
 
     expect(component.remove.emit).toHaveBeenCalledWith(expectedNickname);
   });

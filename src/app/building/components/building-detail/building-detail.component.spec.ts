@@ -6,7 +6,7 @@ import { Building } from '@buildio/building/models';
 import { ComponentsModule } from '@buildio/components';
 import { BuildingDetailComponent } from './building-detail.component';
 
-fdescribe('BuildingDetailComponent', () => {
+describe('BuildingDetailComponent', () => {
   let component: BuildingDetailComponent;
   let fixture: ComponentFixture<BuildingDetailComponent>;
   let buildingDe;
