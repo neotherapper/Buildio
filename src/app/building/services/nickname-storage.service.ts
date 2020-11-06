@@ -19,7 +19,6 @@ export class NicknameStorageService {
   }
 
   addNickName(newNickName: string): void {
-    console.log('addNickName ', newNickName);
     const assets = [...this.nicknamesState.value, newNickName];
     this.nicknamesState.next(assets);
   }
