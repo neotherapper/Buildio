@@ -12,11 +12,12 @@
       </mat-icon>
     </mat-chip>
     <input placeholder="New Nickname..."
+      #chipInput
       class="nickname-editor__input"
       [matChipInputFor]="chipList"
       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
       [matChipInputAddOnBlur]="addOnBlur"
-      (matChipInputTokenEnd)="add.emit($event.value)">
+      (matChipInputTokenEnd)="onAdd($event.value)">
 
   </mat-chip-list>
 </mat-form-field>

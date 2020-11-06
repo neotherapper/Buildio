@@ -4,6 +4,8 @@ import {
   EventEmitter,
   Input,
   Output,
+  ViewChild,
+  ElementRef,
 } from '@angular/core';
 
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
@@ -18,6 +20,7 @@ export class NickameEditorComponent {
   selectable = true;
   removable = true; // this can be an Input on future refactor
   addOnBlur = true;
+  @ViewChild('chipInput') input: ElementRef;
 
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
@@ -34,4 +37,9 @@ export class NickameEditorComponent {
 
   @Output() add = new EventEmitter<string>();
   @Output() remove = new EventEmitter<string>();
+
+  onAdd(text: string): void {
+    this.add.emit(text);
+    this.input.nativeElement.value = '';
+  }
 }
