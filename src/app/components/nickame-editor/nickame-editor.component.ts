@@ -1,19 +1,31 @@
 import {
   Component,
   ChangeDetectionStrategy,
+  EventEmitter,
   Input,
   Output,
-  EventEmitter,
+  ViewChild,
+  ElementRef,
 } from '@angular/core';
-import { Address, Building, Room } from '@buildio/building/models';
+
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
 
 @Component({
-  selector: 'app-building-detail',
-  templateUrl: './building-detail.component.html',
-  styleUrls: ['./building-detail.component.scss'],
+  selector: 'app-nickame-editor',
+  templateUrl: './nickame-editor.component.html',
+  styleUrls: ['./nickame-editor.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BuildingDetailComponent {
+export class NickameEditorComponent {
+  selectable = true;
+  removable = true; // this can be an Input on future refactor
+  addOnBlur = true;
+  @ViewChild('chipInput') input: ElementRef;
+
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+
+  @Input() nicknames!: string[];
+
   /**
    * Presentational components receive data through @Input() and communicate events
    * through @Output() but generally maintain no internal state of their
@@ -23,28 +35,11 @@ export class BuildingDetailComponent {
    * More on 'smart' and 'presentational' components: https://gist.github.com/btroncone/a6e4347326749f938510#utilizing-container-components
    */
 
-  @Input() building!: Building;
-  @Input() nicknames!: string[];
-
   @Output() add = new EventEmitter<string>();
   @Output() remove = new EventEmitter<string>();
 
-  /**
-   * Tip: Utilize getters to keep templates clean
-   */
-  get id(): number {
-    return this.building.id;
-  }
-
-  get address(): Address {
-    return this.building.address;
-  }
-
-  get description(): string {
-    return this.building.description;
-  }
-
-  get rooms(): Room[] {
-    return this.building.rooms;
+  onAdd(text: string): void {
+    this.add.emit(text);
+    this.input.nativeElement.value = '';
   }
 }

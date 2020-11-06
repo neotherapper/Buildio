@@ -1,10 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { Building } from '@buildio/building/models';
+import { ComponentsModule } from '@buildio/components';
 import { BuildingDetailComponent } from './building-detail.component';
 
-fdescribe('BuildingDetailComponent', () => {
+describe('BuildingDetailComponent', () => {
   let component: BuildingDetailComponent;
   let fixture: ComponentFixture<BuildingDetailComponent>;
   let buildingDe;
@@ -13,9 +15,9 @@ fdescribe('BuildingDetailComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BuildingDetailComponent ]
-    })
-    .compileComponents();
+      declarations: [BuildingDetailComponent],
+      imports: [ComponentsModule, BrowserAnimationsModule],
+    }).compileComponents();
   });
 
   beforeEach(() => {

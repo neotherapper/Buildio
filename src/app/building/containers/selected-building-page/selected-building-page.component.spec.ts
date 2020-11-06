@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BuildingDetailComponent } from '@buildio/building/components/building-detail/building-detail.component';
+import { ComponentsModule } from '@buildio/components';
 
 import { SelectedBuildingPageComponent } from './selected-building-page.component';
 
@@ -9,9 +11,9 @@ describe('SelectedBuildingPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SelectedBuildingPageComponent, BuildingDetailComponent ]
-    })
-    .compileComponents();
+      declarations: [SelectedBuildingPageComponent, BuildingDetailComponent],
+      imports: [ComponentsModule, BrowserAnimationsModule],
+    }).compileComponents();
   });
 
   beforeEach(() => {
