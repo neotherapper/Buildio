@@ -10,6 +10,7 @@ import { NicknameStorageService } from '@buildio/building/services/nickname-stor
 export class SelectedBuildingPageComponent implements OnInit {
   building: Building;
   nicknames: string[];
+  canSave: boolean;
 
   constructor(
     private buildService: BuildingService,
@@ -32,22 +33,32 @@ export class SelectedBuildingPageComponent implements OnInit {
     this.nickNameStorage.setNicknames(this.building.nicknames);
 
     // when there is a new change we update the nicknames
-    this.nickNameStorage.nicknamesState.subscribe( (nicknames) => {
+    this.nickNameStorage.nicknamesState.subscribe((nicknames) => {
       this.nicknames = nicknames;
     });
   }
 
   async addNickName(nickname: string): Promise<void> {
+    if (!nickname) {
+      return;
+    }
     const isValidNickname = await this.buildService
       .isValidNickname(nickname)
       .toPromise();
 
     if (isValidNickname) {
       this.nickNameStorage.addNickName(nickname);
+    } else {
+      this.buildService.showWarningMessage(
+        `${nickname} is not a valid option please try a nickname that starts with a`
+      );
     }
   }
 
   async removeNickName(nickname: string): Promise<void> {
+    if (!nickname) {
+      return;
+    }
     const isValidNickname = await this.buildService
       .isValidNickname(nickname)
       .toPromise();
@@ -55,5 +66,9 @@ export class SelectedBuildingPageComponent implements OnInit {
     if (isValidNickname) {
       this.nickNameStorage.removeNickname(nickname);
     }
+  }
+
+  saveNicknames(): void {
+    console.log('Saving nicknames -> ', this.nickNameStorage.getNicknames());
   }
 }

@@ -1,6 +1,16 @@
-<app-building-detail
+<div>
+  <app-building-detail
   [building]="this.building"
   [nicknames]="this.nicknames"
   (add)="addNickName($event)"
   (remove)="removeNickName($event)">
 </app-building-detail>
+
+<button mat-raised-button
+  color="primary"
+  [disabled]="!canSave"
+  (click)="saveNicknames()">
+  Save Nicknames
+</button>
+
+</div>

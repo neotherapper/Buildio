@@ -1,10 +1,18 @@
+import { TestBed } from '@angular/core/testing';
+// import { MatSnackBar } from '@angular/material/snack-bar';
+import { MaterialModule } from '@buildio/material';
 import { BuildingService } from './building.service';
 
 describe('BuildingService', () => {
   let service: BuildingService;
 
   beforeEach(() => {
-    service = new BuildingService();
+    TestBed.configureTestingModule({
+      imports: [MaterialModule],
+      providers: [BuildingService],
+    });
+
+    service = TestBed.inject(BuildingService);
   });
 
   it('should be created', () => {
