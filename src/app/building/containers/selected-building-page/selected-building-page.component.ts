@@ -10,7 +10,7 @@ import { NicknameStorageService } from '@buildio/building/services/nickname-stor
 export class SelectedBuildingPageComponent implements OnInit {
   building: Building;
   nicknames: string[];
-  canSave: boolean;
+  canSaveNicknames: boolean;
 
   constructor(
     private buildService: BuildingService,
@@ -18,9 +18,13 @@ export class SelectedBuildingPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.buildService.canSaveNicknames.subscribe( (areNicknamesValid => {
+      this.canSaveNicknames = areNicknamesValid;
+    }) );
+
     this.building = {
       id: 17,
-      nicknames: ['empire', 'shard'],
+      nicknames: ['aEmpire', 'aShard'],
       address: {
         city: 'London',
         street: '30 St Mary Axe',
@@ -30,7 +34,7 @@ export class SelectedBuildingPageComponent implements OnInit {
         The Empire State Building took only one year and 45 days to build, or more than seven million man-hours`,
     };
 
-    this.nickNameStorage.setNicknames(this.building.nicknames);
+    this.nickNameStorage.set(this.building.nicknames);
 
     // when there is a new change we update the nicknames
     this.nickNameStorage.nicknamesState.subscribe((nicknames) => {
@@ -38,37 +42,21 @@ export class SelectedBuildingPageComponent implements OnInit {
     });
   }
 
-  async addNickName(nickname: string): Promise<void> {
+  addNickname(nickname: string): void {
     if (!nickname) {
       return;
     }
-    const isValidNickname = await this.buildService
-      .isValidNickname(nickname)
-      .toPromise();
-
-    if (isValidNickname) {
-      this.nickNameStorage.addNickName(nickname);
-    } else {
-      this.buildService.showWarningMessage(
-        `${nickname} is not a valid option please try a nickname that starts with a`
-      );
-    }
+    this.buildService.addNickname(nickname);
   }
 
-  async removeNickName(nickname: string): Promise<void> {
+  removeNickname(nickname: string): void {
     if (!nickname) {
       return;
     }
-    const isValidNickname = await this.buildService
-      .isValidNickname(nickname)
-      .toPromise();
-
-    if (isValidNickname) {
-      this.nickNameStorage.removeNickname(nickname);
-    }
+    this.buildService.removeNickname(nickname);
   }
 
   saveNicknames(): void {
-    console.log('Saving nicknames -> ', this.nickNameStorage.getNicknames());
+    console.log('Saving nicknames -> ', this.nickNameStorage.get());
   }
 }

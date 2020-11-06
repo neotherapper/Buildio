@@ -10,20 +10,20 @@ export class NicknameStorageService {
 
   constructor() {}
 
-  getNicknames(): string[] {
+  get(): string[] {
     return this.nicknamesState.value;
   }
 
-  setNicknames(nicknames: string[]): void {
+  set(nicknames: string[]): void {
     this.nicknamesState.next(nicknames);
   }
 
-  addNickName(newNickName: string): void {
-    const assets = [...this.nicknamesState.value, newNickName];
+  add(newNickname: string): void {
+    const assets = [...this.nicknamesState.value, newNickname];
     this.nicknamesState.next(assets);
   }
 
-  removeNickname(nickname: string): void {
+  remove(nickname: string): void {
     const currentNickNames = this.nicknamesState.value;
     const newNickNames = currentNickNames.filter((e) => e !== nickname);
     this.nicknamesState.next(newNickNames);
